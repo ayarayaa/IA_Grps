@@ -170,8 +170,8 @@ Nom_Prenom/
 
 | Fichier | Description | Obligatoire |
 |---------|-------------|-------------|
-| `TP_M104_Statistiques_App.html` | Application web interactive fournie | ✅ Oui |
-| `TP_NoteBook.ipynb` | Votre notebook avec analyses et réponses | ✅ Oui |
+| `TP_M104_Statistiques_App.html` | Application web interactive fournie | Oui |
+| `TP_NoteBook.ipynb` | Votre notebook avec analyses et réponses | Oui |
 
 ---
 
@@ -258,7 +258,7 @@ git push origin main
 
 ---
 
-## 📚 Ressources Complémentaires
+## Ressources Complémentaires
 
 ### Concepts Statistiques
 - **Statistiques descriptives:** Résumer et décrire les données
