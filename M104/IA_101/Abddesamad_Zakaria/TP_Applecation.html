@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Data Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <h2 class="text-center mb-4">StudentsPerformance.csv Analyzer</h2>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card shadow-sm p-4">
+                    <h5 class="mb-3">Add New Record</h5>
+                    <form method="POST">
+                        <label class="small fw-bold">Math Score</label>
+                        <input type="number" name="math" class="form-control mb-2" required>
+                        <label class="small fw-bold">Reading Score</label>
+                        <input type="number" name="reading" class="form-control mb-2" required>
+                        <label class="small fw-bold">Writing Score</label>
+                        <input type="number" name="writing" class="form-control mb-3" required>
+                        <button type="submit" class="btn btn-dark w-100">Update CSV & Graph</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="card shadow-sm p-4">
+                    <canvas id="performanceChart" height="150"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5 card shadow-sm p-4">
+            <h5>Recent Data from CSV</h5>
+            <table class="table table-hover mt-3">
+                <thead class="table-light">
+                    <tr>
+                        <th>Math Score</th>
+                        <th>Reading Score</th>
+                        <th>Writing Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in history|reverse %}
+                    <tr>
+                        <td>{{ row['math score'] }}</td>
+                        <td>{{ row['reading score'] }}</td>
+                        <td>{{ row['writing score'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Math', 'Reading', 'Writing'],
+                datasets: [{
+                    label: 'Scores',
+                    data: [{{ data.math }}, {{ data.reading }}, {{ data.writing }}],
+                    backgroundColor: ['#6366f1', '#10b981', '#f59e0b']
+                }]
+            },
+            options: {
+                scales: { y: { beginAtZero: true, max: 100 } }
+            }
+        });
+    </script>
+</body>
+</html>
